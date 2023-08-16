@@ -1,7 +1,8 @@
 import java.lang.Math;
 import java.util.Scanner;
 import java.io.File;
-
+import java.io.FileNotFoundException;
+import java.util.HashMap;
 /**
  * Contract class for each individual options contract,
  * taking 5 variables needed for BSM formula
@@ -28,9 +29,10 @@ public class Contract {
         double d1 = ((log + (secondGrouping * time))) / (volatility * Math.sqrt(time));
         double d2 = d1 - (volatility * Math.sqrt(time));
 
+        double callPrice = 0;
         //NEED TO DO, double value of final call price to return *********
 
-        return d2;
+        return callPrice;
     }
 
     /**
@@ -40,15 +42,22 @@ public class Contract {
      */
     public double getNormalDistribution(double key) {
         
-        Scanner read = new Scanner("StandardNormalDistribution.txt");
         File standardND = new File("/C:/Users/rtric/Desktop/ResumeProjects/EuroOptionsPricer/orderedCurve.txt/");
+        Scanner read;
+        try {
+            read = new Scanner(standardND);
+            HashMap<Double, Double> normalDist = new HashMap<>();
 
-        while (read.hasNext()) {
-            String line = read.nextLine();
+            while (read.hasNext()) {
+                String line = read.nextLine();
             
-        }
+            }
 
-        read.close();
+            read.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("normal distribution not read");
+            e.printStackTrace();
+        }
         return 0.0;
     }
 
