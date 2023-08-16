@@ -1,5 +1,6 @@
 import java.lang.Math;
 import java.util.Scanner;
+import java.io.File;
 
 /**
  * Contract class for each individual options contract,
@@ -10,7 +11,7 @@ import java.util.Scanner;
 public class Contract {
     private double strikePrice;
     private double stockPrice;
-    private double timeToExp; //number of years
+    private double timeToExp; // number of years (percent decimal)
     private double riskFreeRate; // percent decimal
     private double volatility; //rho (percent decimal)
 
@@ -27,7 +28,9 @@ public class Contract {
         double d1 = ((log + (secondGrouping * time))) / (volatility * Math.sqrt(time));
         double d2 = d1 - (volatility * Math.sqrt(time));
 
-        return stockPrice;
+        //NEED TO DO, double value of final call price to return *********
+
+        return d2;
     }
 
     /**
@@ -36,10 +39,13 @@ public class Contract {
      * @return distribution value for final call price
      */
     public double getNormalDistribution(double key) {
+        
         Scanner read = new Scanner("StandardNormalDistribution.txt");
+        File standardND = new File("/C:/Users/rtric/Desktop/ResumeProjects/EuroOptionsPricer/orderedCurve.txt/");
 
         while (read.hasNext()) {
-            read.nextLine();
+            String line = read.nextLine();
+            
         }
 
         read.close();
