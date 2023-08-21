@@ -48,9 +48,11 @@ public class Contract {
             read = new Scanner(standardND);
             HashMap<Double, Double> normalDist = new HashMap<>();
 
-            while (read.hasNext()) {
-                String line = read.nextLine();
-            
+            while (read.hasNextLine()) {
+                String first = read.next();
+                String second = read.next();
+                normalDist.put(Double.parseDouble(first), Double.parseDouble(second));
+                read.nextLine();
             }
 
             read.close();
