@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.lang.Math;
 /**
  * Contract class for each individual options contract,
  * taking 5 variables needed for BSM formula
@@ -62,6 +63,7 @@ public class Contract {
         
         File standardND = new File("/C:/Users/rtric/Desktop/ResumeProjects/EuroOptionsPricer/orderedCurve.txt/");
         Scanner read;
+        double roundedKey = Math.round(key * 100) / 100;
         try {
             read = new Scanner(standardND);
             HashMap<Double, Double> normalDist = new HashMap<>();
@@ -72,8 +74,10 @@ public class Contract {
                 normalDist.put(Double.parseDouble(first), Double.parseDouble(second));
                 read.nextLine();
             }
-
             read.close();
+
+            return (normalDist.get(roundedKey));
+
         } catch (FileNotFoundException e) {
             System.out.println("normal distribution not read");
             e.printStackTrace();
