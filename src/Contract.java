@@ -12,9 +12,27 @@ import java.util.HashMap;
 public class Contract {
     private double strikePrice;
     private double stockPrice;
-    private double timeToExp; // number of years (percent decimal)
-    private double riskFreeRate; // percent decimal
-    private double volatility; //rho (percent decimal)
+    private double timeToExp;
+    private double riskFreeRate; 
+    private double volatility; 
+
+    /**
+     * Options contract setting call arguments
+     * @param strikePrice excercise price
+     * @param stockPrice share price
+     * @param timeToExp time to expiration, expressed in years
+     * @param riskFreeRate time to expiration, expressed in years
+     * @param volatility percent decimal of rho
+     */
+    public Contract(double strikePrice, double stockPrice, double timeToExp, double riskFreeRate, double volatility) {
+        
+        this.strikePrice = strikePrice;
+        this.stockPrice = stockPrice;
+        this.timeToExp = timeToExp;
+        this.riskFreeRate = riskFreeRate;
+        this.volatility = volatility;
+
+    }
 
     /**
      * final calculation of call price using BSM
