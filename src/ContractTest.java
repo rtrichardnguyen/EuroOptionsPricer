@@ -23,7 +23,8 @@ public class ContractTest {
      */
     @Test
     public void testGetCallPrice() {
-        assertEquals(contract.getCallPrice(), 3.72, 0.1);
+        assertEquals(contract.getContractPrice("p"), 1.46, 0.1);
+        assertEquals(contract.getContractPrice("c"), 3.72, 0.1);
     }
 
     /**

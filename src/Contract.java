@@ -39,7 +39,7 @@ public class Contract {
      * final calculation of call price using BSM
      * @return price of european call contract
      */
-    public double getCallPrice() {
+    public double getContractPrice(String contractType) {
 
         double log = Math.log(stockPrice / strikePrice);
         double secondGrouping = riskFreeRate + (0.5 * Math.pow(volatility, 2.0));
@@ -54,7 +54,15 @@ public class Contract {
         double callPrice = (this.stockPrice * n1) - 
             (strikePrice / ((Math.exp(riskFreeRate * timeToExp))) * n2);
 
-        return callPrice;
+        double putPrice = callPrice + (strikePrice / ((Math.exp(riskFreeRate * timeToExp)))) - stockPrice;
+
+        if (contractType.equals("p")) {
+            return putPrice;
+        }
+        else {
+            return callPrice;
+        }
+
     }
 
     /**
