@@ -54,9 +54,11 @@ public class Contract {
         double callPrice = (this.stockPrice * n1) - 
             (strikePrice / ((Math.exp(riskFreeRate * timeToExp))) * n2);
 
-        double putPrice = callPrice + (strikePrice / ((Math.exp(riskFreeRate * timeToExp)))) - stockPrice;
+        double putPrice = callPrice + (strikePrice / 
+            ((Math.exp(riskFreeRate * timeToExp)))) - stockPrice;
 
-        if (contractType.equals("p")) {
+        if (contractType.equals("p") || 
+            contractType.equals("P")) {
             return putPrice;
         }
         else {
