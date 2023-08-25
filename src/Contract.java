@@ -37,7 +37,7 @@ public class Contract {
 
     /**
      * final calculation of call price using BSM
-     * @return
+     * @return price of european call contract
      */
     public double getCallPrice() {
 
