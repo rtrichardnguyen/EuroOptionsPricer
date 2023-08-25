@@ -24,7 +24,8 @@ public class Contract {
      * @param riskFreeRate time to expiration, expressed in years
      * @param volatility percent decimal of rho
      */
-    public Contract(double strikePrice, double stockPrice, double timeToExp, double riskFreeRate, double volatility) {
+    public Contract(double strikePrice, double stockPrice, 
+        double timeToExp, double riskFreeRate, double volatility) {
         
         this.strikePrice = strikePrice;
         this.stockPrice = stockPrice;
@@ -43,13 +44,15 @@ public class Contract {
         double log = Math.log(stockPrice / strikePrice);
         double secondGrouping = riskFreeRate + (0.5 * Math.pow(volatility, 2.0));
 
-        double d1 = ((log + (secondGrouping * timeToExp))) / (volatility * Math.sqrt(timeToExp));
+        double d1 = ((log + (secondGrouping * timeToExp))) /
+            (volatility * Math.sqrt(timeToExp));
         double d2 = d1 - (volatility * Math.sqrt(timeToExp));
 
         double n1 = this.getNormalDistribution(d1);
         double n2 = this.getNormalDistribution(d2);
 
-        double callPrice = (this.stockPrice * n1) - (strikePrice / ((Math.exp(riskFreeRate * timeToExp))) * n2);
+        double callPrice = (this.stockPrice * n1) - 
+            (strikePrice / ((Math.exp(riskFreeRate * timeToExp))) * n2);
 
         return callPrice;
     }
@@ -61,7 +64,8 @@ public class Contract {
      */
     public double getNormalDistribution(double key) {
         
-        File standardND = new File("/C:/Users/rtric/Desktop/ResumeProjects/EuroOptionsPricer/orderedCurve.txt/");
+        File standardND = new File("/C:/Users/rtric/Desktop" + 
+            "/ResumeProjects/EuroOptionsPricer/orderedCurve.txt/");
         Scanner read;
         double roundedKey = Math.round(key * 100.0) / 100.0;
         try {
@@ -79,7 +83,8 @@ public class Contract {
             return (normalDist.get(roundedKey));
 
         } catch (FileNotFoundException e) {
-            System.out.println("normal distribution not read");
+            System.out.println("rounded key (derivative 1 or 2)" + 
+                " did not match a key in the HashMap");
             e.printStackTrace();
         }
         return 0.0;
