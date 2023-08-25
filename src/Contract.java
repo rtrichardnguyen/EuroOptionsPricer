@@ -3,7 +3,6 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
-import java.lang.Math;
 /**
  * Contract class for each individual options contract,
  * taking 5 variables needed for BSM formula
@@ -29,9 +28,9 @@ public class Contract {
         
         this.strikePrice = strikePrice;
         this.stockPrice = stockPrice;
-        this.timeToExp = timeToExp;
-        this.riskFreeRate = riskFreeRate;
-        this.volatility = volatility;
+        this.timeToExp = timeToExp / 365;
+        this.riskFreeRate = riskFreeRate / 100;
+        this.volatility = volatility / 100;
 
     }
 
@@ -43,13 +42,14 @@ public class Contract {
 
         double log = Math.log(stockPrice / strikePrice);
         double secondGrouping = riskFreeRate + (0.5 * Math.pow(volatility, 2.0));
-        double time = timeToExp / 365;
 
-        double d1 = ((log + (secondGrouping * time))) / (volatility * Math.sqrt(time));
-        double d2 = d1 - (volatility * Math.sqrt(time));
+        double d1 = ((log + (secondGrouping * timeToExp))) / (volatility * Math.sqrt(timeToExp));
+        double d2 = d1 - (volatility * Math.sqrt(timeToExp));
 
-        double callPrice = 0;
-        //NEED TO DO, double value of final call price to return *********
+        double n1 = this.getNormalDistribution(d1);
+        double n2 = this.getNormalDistribution(d2);
+
+        double callPrice = (this.stockPrice * n1) - (strikePrice / ((Math.exp(riskFreeRate * timeToExp))) * n2);
 
         return callPrice;
     }
@@ -63,7 +63,7 @@ public class Contract {
         
         File standardND = new File("/C:/Users/rtric/Desktop/ResumeProjects/EuroOptionsPricer/orderedCurve.txt/");
         Scanner read;
-        double roundedKey = Math.round(key * 100) / 100;
+        double roundedKey = Math.round(key * 100.0) / 100.0;
         try {
             read = new Scanner(standardND);
             HashMap<Double, Double> normalDist = new HashMap<>();

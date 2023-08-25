@@ -15,7 +15,7 @@ public class ContractTest {
      */
     @Before
     public void setUp() {
-        contract = new Contract(1, 1, 1, 1, 1);
+        contract = new Contract(60, 62, 40, 4, 32);
     }
 
     /**
@@ -23,8 +23,7 @@ public class ContractTest {
      */
     @Test
     public void testGetCallPrice() {
-        assertEquals(1, 1);
-        assertEquals(contract.getCallPrice(), 0, 0.1);
+        assertEquals(contract.getCallPrice(), 3.72, 0.1);
     }
 
     /**
@@ -32,8 +31,10 @@ public class ContractTest {
      */
     @Test
     public void testGetNormalDistribution() {
-        assertEquals(1, 1);
-        assertEquals(contract.getNormalDistribution(0), 0, 0.1);
+        assertEquals(contract.getNormalDistribution(-2.8), 0.0026, 0.1);
+        assertEquals(contract.getNormalDistribution(-1.74), 0.0409, 0.1);
+        assertEquals(contract.getNormalDistribution(-0.71), 0.2389, 0.1);
+        assertEquals(contract.getNormalDistribution(2.15), 0.9842, 0.1);
     }
 
 }
